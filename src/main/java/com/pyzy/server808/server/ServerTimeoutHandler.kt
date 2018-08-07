@@ -1,11 +1,11 @@
-package com.pyzy.server808.first
+package com.pyzy.server808.server
 
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelInboundHandlerAdapter
 import io.netty.handler.timeout.IdleState
 import io.netty.handler.timeout.IdleStateEvent
 
-class MyChatServerTimeoutHandler : ChannelInboundHandlerAdapter() {
+class ServerTimeoutHandler : ChannelInboundHandlerAdapter() {
 
     companion object {
         var timeout = 10;
@@ -23,7 +23,7 @@ class MyChatServerTimeoutHandler : ChannelInboundHandlerAdapter() {
             when(evt.state()){
 
                 IdleState.ALL_IDLE->{
-                    println("All   [${ctx.channel().id()}] -> ${(System.currentTimeMillis() - baseTime )/ 1000}")
+                    println("All   [${ctx.channel().id()}] -> ${(System.currentTimeMillis() - baseTime)/ 1000}")
 
                     val channel = ctx.channel()
 
@@ -31,7 +31,7 @@ class MyChatServerTimeoutHandler : ChannelInboundHandlerAdapter() {
 
                     channel.close()
 
-                    MyChatServerTextHandler.channelGroup.remove(channel)
+                    ServerTextHandler.channelGroup.remove(channel)
 //                    println("服务器空闲 通道:$id")
                 }
 

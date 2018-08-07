@@ -1,11 +1,11 @@
 package com.pyzy.server808.message
 
-import com.sun.org.apache.xpath.internal.operations.Bool
+import com.pyzy.server808.ext.bcd
+import com.pyzy.server808.ext.printHexString
+import com.pyzy.server808.utils.ClassHelper
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.Unpooled
-import java.nio.ByteBuffer
-import java.nio.charset.Charset
-import kotlin.experimental.and
+import java.text.ParseException
 import kotlin.experimental.xor
 
 class Header{
@@ -90,6 +90,8 @@ class Header{
     var packetIndex:Int = -1//2字节
 
 
+
+
     fun isDivider():Boolean{
         //第13位为1时表示分包
         return property and 0x2000 != 0
@@ -125,7 +127,9 @@ class Message{
     companion object {
         var Identification :Byte = 0x7e
 
-        //只单纯的进行字符转义,不转换成为对象
+
+
+            //只单纯的进行字符转义,不转换成为对象
         fun decoder0x7e(buffer:ByteBuf):ByteBuf{
 
             var buf = Unpooled.buffer(buffer.capacity())
@@ -230,15 +234,15 @@ class Message{
     }
 
     var header : Header?;
-    var body:ByteBuffer;
+    var body:ByteBuf;
 
 
     constructor(){
-        this.body = ByteBuffer.allocate(0);
+        this.body = Unpooled.buffer(0)
         this.header = null;
     }
 
-    constructor(body:ByteBuffer,header: Header){
+    constructor(body:ByteBuf,header: Header){
         this.body = body
         this.header = header
     }
@@ -247,60 +251,14 @@ class Message{
 }
 
 
-fun ByteBuf.printHexString(){
-    for (x in 0 until readableBytes()){
-        print(String.format("0x%02x ",getByte(x)))
-    }
-    println()
-}
-
-fun ByteBuf.readInt16():Int{
-    return readShort().toInt()
-}
-
-fun ByteBuf.readInt8():Int{
-    return readByte().toInt()
-}
-
-fun ByteBuf.readString(length:Int):String{
-    var bytes = ByteBuffer.allocate(length)
-    readBytes(bytes)
-    return String(Charset.defaultCharset().decode(bytes).array())
-}
-
-fun ByteBuf.readLastString():String{
-    var length = readableBytes() - readerIndex()
-    return readString(length)
-}
-
-fun ByteBuf.writeString(value:String){
-
-    var buffer = Charset.defaultCharset().encode(value)
-
-    writeBytes(buffer)
-
-}
-
-
-fun List<Byte>.printHexString(){
-    for (x in 0 until size){
-        print(String.format("0x%02x ",get(x)))
-    }
-    println()
-}
 
 
 
-fun String.bcd():Int{
-    var result = 0
-    var reverse = reversed()
 
-    for(x in 0 until length){
-//        println(" x : ${reverse[x]}  parse:  ${reverse[x].toString().toInt()}" )
-        result += (reverse[x].toString().toInt() shl (4 * x))//只适用于2位字符串转bcd  更多为的请使用移位操作来完成
-    }
-    return result
-}
+
+
+
+
 
 
 fun testMessage(){
@@ -362,14 +320,14 @@ fun testHeader(){
     buffer.printHexString()
 
 
-
-
 }
 
 
 fun main(args: Array<String>) {
 
-    testHeader()
+//    testHeader()
+
+//    println(Message.messageMap)
 
 
 

@@ -1,17 +1,14 @@
-package com.pyzy.server808.first
+package com.pyzy.server808.server
 
 import com.alibaba.fastjson.JSON
 import com.pyzy.server808.model.Person
-import com.pyzy.server808.service.PersonHandler
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.SimpleChannelInboundHandler
-import io.netty.channel.group.ChannelMatcher
 import io.netty.channel.group.ChannelMatchers
 import io.netty.channel.group.DefaultChannelGroup
 import io.netty.util.concurrent.GlobalEventExecutor
-import kotlin.reflect.KClass
 
-class MyChatServerTextHandler : SimpleChannelInboundHandler<String>(){
+class ServerTextHandler : SimpleChannelInboundHandler<String>(){
 
     companion object {
         var channelGroup = DefaultChannelGroup(GlobalEventExecutor.INSTANCE)

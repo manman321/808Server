@@ -1,7 +1,7 @@
-package com.pyzy.server808.first
+package com.pyzy.server808
 
+import com.pyzy.server808.server.ServerInitializer
 import io.netty.bootstrap.ServerBootstrap
-import io.netty.channel.nio.NioEventLoop
 import io.netty.channel.nio.NioEventLoopGroup
 import io.netty.channel.socket.nio.NioServerSocketChannel
 import io.netty.handler.logging.LogLevel
@@ -29,7 +29,7 @@ class MyChatServer{
 
             serverBootstrap.group(parentGroup, childGroup).channel(NioServerSocketChannel::class.java)
                     .handler(LoggingHandler(LogLevel.INFO))
-                    .childHandler(MyChatServerInitializer())
+                    .childHandler(ServerInitializer())
 
             var channelFuture = serverBootstrap.bind(8899).sync()
 

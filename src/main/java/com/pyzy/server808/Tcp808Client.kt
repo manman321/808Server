@@ -1,95 +1,72 @@
 package com.pyzy.server808
 
-
-data class Customer(val name: String, val email: String){
-
-
-}
-
-
-class Message{
-
-    var type: Int = 1
-
-    var message:String? = null;
-
-
-    fun convert(convert: Boolean = false): Int{
-
-        if(!convert)return -1;
-
-        return if (message == null) 0 else 2;
-    }
-
-
-    fun getStringLength(obj: Any):Int?{
-        if(obj is String)
-            return obj.length;
-
-        return null;
-    }
-
-
-}
-
-
-class Tcp808Client{
-
-
-     fun  main(args:Array<String>) {
-        println("Hello world")
-
-
-    }
-
-
-    fun sum(a: Int, b: Int): Int{
-        return  a + b
-    }
-
-}
-
+import com.pyzy.server808.client.ClientInitializer
+import io.netty.bootstrap.Bootstrap
+import io.netty.channel.Channel
+import io.netty.channel.nio.NioEventLoopGroup
+import io.netty.channel.socket.nio.NioSocketChannel
+import java.util.*
 
 fun main(args: Array<String>) {
+    MyChatClient().execute()
+}
 
-    var client = Tcp808Client();
+class MyChatClient{
 
-    var items = listOf<String>("a","b")
-
-    client.main(items.toTypedArray())
-
-
-
-    var sum = Tcp808Client().sum(1,2);
-
-    println(sum)
+    @Throws(Exception::class)
+    fun execute(){
 
 
-    var message = Message();
+        val eventGroup = NioEventLoopGroup()
 
-    var length = message.getStringLength(1);
+        var uid = UUID.randomUUID().toString()
 
-    println(length)
+        try {
+
+            val bootstrap = Bootstrap()
+
+            bootstrap.group(eventGroup).channel(NioSocketChannel::class.java)
+                    .handler(ClientInitializer())
+
+            var channel : Channel? = null
+
+            while (true){
+                var line = readLine()
+
+                if (channel == null || !channel.isOpen || !channel.isWritable || !channel.isRegistered || !channel.isActive){
+
+                    channel = connectServer(bootstrap)
+
+                    while (true){
+                        if(channel != null && channel.isOpen && channel.isActive && channel.isRegistered && channel.isWritable){
+                            break
+                        }
+                    }
+                    //user login
+
+
+                    channel!!.writeAndFlush("【客户端登录】 UID:$uid\r\n")
+
+                }
+
+                channel!!
+
+//                println("channel open: ${channel.isOpen} , active: ${channel.isActive} register:${channel.isRegistered} writable: ${channel.isWritable}")
+
+                channel.writeAndFlush(line + "\r\n")
+            }
+
+        }finally {
+            eventGroup.shutdownGracefully()
+        }
 
 
 
 
+    }
 
-   println(message.convert(true))
-
-
-
-
-
-    var list = listOf<Int>(1,2,3,4,5).filter { x-> x > 2 }
-
-    list.forEach { i-> print(i) }
-
-
-
-    mapOf<String,String>("a" to "b","c" to "d").forEach { t, u -> println("$t,$u") }
-
-
-
+    private fun connectServer(bootstrap: Bootstrap):Channel{
+       return bootstrap.connect("localhost",8899).channel()
+    }
 
 }

@@ -2,9 +2,36 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="018588fb-630b-47e4-b367-cafb75a04443" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/modules/server_main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/server_test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/decoder/JTT808BasedFrameDecoder.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/decoder/JTT808BasedFrameEncoder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/decoder/JTT808MessageDecoder.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/ext/ByteBuf.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/ext/Class.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/ext/List.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/ext/String.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/service/DefaultHandler.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/utils/ClassHelper.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/OldIoClient.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/OldIoServer.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/Tcp808Server.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/first/DataClassSimple.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/first/MyChatClient.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/Tcp808Client.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/first/MyChatClientHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/client/ClientHandler.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/first/MyChatClientInitializer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/client/ClientInitializer.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/first/MyChatClientTextHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/client/ClientTextHandler.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/first/MyChatServer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/Tcp808Server.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/first/MyChatServerInitializer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/server/ServerInitializer.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/first/MyChatServerMessageHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/server/ServerMessageHandler.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/first/MyChatServerTextHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/server/ServerTextHandler.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/first/MyChatServerTimeoutHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/server/ServerTimeoutHandler.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/first/Test.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/message/JTTMessage.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/message/JTTMessage.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/message/Message.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/message/Message.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/service/Decoder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/service/Handler.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/service/PersonHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pyzy/server808/service/PersonHandler.kt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -23,48 +50,124 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="OldIoClient.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/OldIoClient.kt">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file leaf-file-name="OldIoServer.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/OldIoServer.kt">
+      <file leaf-file-name="JTT808MessageDecoder.kt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/decoder/JTT808MessageDecoder.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="31" column="39" selection-start-line="31" selection-start-column="39" selection-end-line="31" selection-end-column="39" />
+            <state relative-caret-position="210">
+              <caret line="14" column="7" lean-forward="true" selection-start-line="14" selection-start-column="7" selection-end-line="30" selection-end-column="23" />
+              <folding>
+                <element signature="e#36#249#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build.gradle">
+      <file leaf-file-name="ServerInitializer.kt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/server/ServerInitializer.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="676">
-              <caret line="52" column="34" lean-forward="true" selection-start-line="52" selection-start-column="34" selection-end-line="52" selection-end-column="34" />
+            <state relative-caret-position="465">
+              <caret line="36" column="50" lean-forward="true" selection-start-line="36" selection-start-column="50" selection-end-line="36" selection-end-column="50" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.gradle" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/settings.gradle">
+      <file leaf-file-name="JTT808BasedFrameDecoder.kt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/decoder/JTT808BasedFrameDecoder.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="24" selection-start-column="24" selection-end-column="24" />
+            <state relative-caret-position="601">
+              <caret line="293" lean-forward="true" selection-start-line="293" selection-end-line="293" />
+              <folding>
+                <element signature="e#671#1079#0" expanded="true" />
+                <element signature="n#!!block;n#decode#1;n#!!block;n#JTT808BasedFrameDecoder#0" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Tcp808Server.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/Tcp808Server.java">
+      <file leaf-file-name="Array.kt" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.2.31/a1a0b714cb760f9bd0f4f9d04915c1748eaefc64/kotlin-stdlib-1.2.31-sources.jar!/kotlin/Array.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+            <state relative-caret-position="240">
+              <caret line="30" column="57" selection-start-line="30" selection-start-column="56" selection-end-line="30" selection-end-column="57" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Library.kt" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.2.31/a1a0b714cb760f9bd0f4f9d04915c1748eaefc64/kotlin-stdlib-1.2.31-sources.jar!/kotlin/Library.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="262">
+              <caret line="40" column="76" lean-forward="true" selection-start-line="40" selection-start-column="76" selection-end-line="40" selection-end-column="76" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ServerTextHandler.kt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/server/ServerTextHandler.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="690">
+              <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ServerMessageHandler.kt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/server/ServerMessageHandler.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="361">
+              <caret line="34" column="51" selection-start-line="34" selection-start-column="51" selection-end-line="34" selection-end-column="51" />
+              <folding>
+                <element signature="e#35#325#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Handler.kt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/service/Handler.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="11" column="1" lean-forward="true" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
+              <folding>
+                <element signature="e#36#126#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PersonHandler.kt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/service/PersonHandler.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" column="5" lean-forward="true" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+              <folding>
+                <element signature="e#36#125#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DefaultHandler.kt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/service/DefaultHandler.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" column="20" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="20" />
+              <folding>
+                <element signature="e#36#126#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Kotlin File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -85,14 +188,14 @@
         <entry>
           <key>
             <ExternalProjectPojo>
-              <option name="name" value="server" />
+              <option name="name" value="808Server" />
               <option name="path" value="$PROJECT_DIR$" />
             </ExternalProjectPojo>
           </key>
           <value>
             <list>
               <ExternalProjectPojo>
-                <option name="name" value="server" />
+                <option name="name" value="808Server" />
                 <option name="path" value="$PROJECT_DIR$" />
               </ExternalProjectPojo>
             </list>
@@ -106,7 +209,7 @@
           <value>
             <list>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the components produced by root project 'server'. [incubating]" />
+                <option name="description" value="Displays the components produced by root project '808Server'. [incubating]" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="components" />
               </ExternalTaskPojo>
@@ -116,7 +219,7 @@
                 <option name="name" value="buildDependents" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the sub-projects of root project 'server'." />
+                <option name="description" value="Displays the sub-projects of root project '808Server'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="projects" />
               </ExternalTaskPojo>
@@ -126,12 +229,12 @@
                 <option name="name" value="classes" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the dependent components of components in root project 'server'. [incubating]" />
+                <option name="description" value="Displays the dependent components of components in root project '808Server'. [incubating]" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="dependentComponents" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays all buildscript dependencies declared in root project 'server'." />
+                <option name="description" value="Displays all buildscript dependencies declared in root project '808Server'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="buildEnvironment" />
               </ExternalTaskPojo>
@@ -156,7 +259,7 @@
                 <option name="name" value="jar" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the configuration model of root project 'server'. [incubating]" />
+                <option name="description" value="Displays the configuration model of root project '808Server'. [incubating]" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="model" />
               </ExternalTaskPojo>
@@ -166,7 +269,7 @@
                 <option name="name" value="processResources" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the tasks runnable from root project 'server'." />
+                <option name="description" value="Displays the tasks runnable from root project '808Server'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="tasks" />
               </ExternalTaskPojo>
@@ -191,7 +294,7 @@
                 <option name="name" value="compileTestKotlin" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the insight into a specific dependency in root project 'server'." />
+                <option name="description" value="Displays the insight into a specific dependency in root project '808Server'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="dependencyInsight" />
               </ExternalTaskPojo>
@@ -216,7 +319,7 @@
                 <option name="name" value="compileTestJava" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays all dependencies declared in root project 'server'." />
+                <option name="description" value="Displays all dependencies declared in root project '808Server'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="dependencies" />
               </ExternalTaskPojo>
@@ -246,7 +349,7 @@
                 <option name="name" value="buildNeeded" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the properties of root project 'server'." />
+                <option name="description" value="Displays the properties of root project '808Server'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="properties" />
               </ExternalTaskPojo>
@@ -258,10 +361,9 @@
     <option name="modificationStamps">
       <map>
         <entry key="$USER_HOME$/.gradle/gradle.properties" value="2971449908" />
-        <entry key="$PROJECT_DIR$" value="6054098663000" />
         <entry key="$PROJECT_DIR$/.gradle" value="0" />
         <entry key="$PROJECT_DIR$/build.gradle" value="535440360" />
-        <entry key="$PROJECT_DIR$/settings.gradle" value="3556901170" />
+        <entry key="$PROJECT_DIR$/settings.gradle" value="3511830326" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -308,7 +410,7 @@
                   </entry>
                 </map>
               </option>
-              <option name="name" value="server" />
+              <option name="name" value="808Server" />
               <option name="projectBuildClasspath">
                 <list>
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.4-bin/bgaq7vklkazwgxox0hdadxbvi/gradle-4.4/lib/ant-1.9.9.jar" />
@@ -404,6 +506,35 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/settings.gradle" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pyzy/server808/decoder/JTT808BasedEncoder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pyzy/server808/decoder/JTT808BasedFrameEncoder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pyzy/server808/first/MyChatServerInitializer.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pyzy/server808/first/MyChatClient.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pyzy/server808/decoder/haha.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pyzy/server808/decoder/haha.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pyzy/server808/ext/ByteBuf.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pyzy/server808/ext/String.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pyzy/server808/ext/List.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pyzy/server808/utils/JTTMessageHelper.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pyzy/server808/ext/ClassKit.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pyzy/server808/utils/Haha.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pyzy/server808/utils/Haha.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pyzy/server808/utils/ClassHelper.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pyzy/server808/decoder/JTT808MessageDecoder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pyzy/server808/message/Message.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pyzy/server808/message/JTTMessage.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pyzy/server808/server/MyChatServer.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pyzy/server808/Tcp808Client.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pyzy/server808/client/ClientTextHandler.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pyzy/server808/decoder/JTT808MessageDecoder.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pyzy/server808/decoder/JTT808BasedFrameDecoder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pyzy/server808/decoder/JTT808BasedFrameDecoder.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pyzy/server808/server/ServerInitializer.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pyzy/server808/service/PersonHandler.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pyzy/server808/service/Decoder.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pyzy/server808/service/Handler.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pyzy/server808/service/DefaultHandler.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pyzy/server808/server/ServerMessageHandler.kt" />
       </list>
     </option>
   </component>
@@ -417,8 +548,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="40" />
-    <option name="y" value="23" />
+    <option name="x" value="-14" />
+    <option name="y" value="29" />
     <option name="width" value="1611" />
     <option name="height" value="935" />
   </component>
@@ -437,6 +568,86 @@
               <item name="808Server" type="b2602c69:ProjectViewProjectNode" />
               <item name="808Server" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
             </path>
+            <path>
+              <item name="808Server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="808Server" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="808Server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="808Server" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="808Server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="808Server" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="808Server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="808Server" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="server808" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="808Server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="808Server" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="server808" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="808Server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="808Server" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="server808" type="462c0819:PsiDirectoryNode" />
+              <item name="decoder" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="808Server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="808Server" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="server808" type="462c0819:PsiDirectoryNode" />
+              <item name="handler" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="808Server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="808Server" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="server808" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="808Server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="808Server" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="server808" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="808Server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="808Server" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="server808" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -454,7 +665,12 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.pyzy.server808.decoder" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/com/pyzy/server808" />
+      <recent name="$PROJECT_DIR$/src/main/java/com/pyzy/server808/server" />
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
@@ -470,7 +686,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Kotlin.com.pyzy.server808.message.MessageKt">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
     </configuration>
@@ -531,6 +747,26 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+    </configuration>
+    <configuration name="com.pyzy.server808.message.MessageKt" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
+      <module name="808Server_main" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.pyzy.server808.message.MessageKt" />
+      <option name="WORKING_DIRECTORY" />
+    </configuration>
+    <configuration name="com.pyzy.server808.utils.ClassHelperKt" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
+      <module name="808Server_main" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.pyzy.server808.utils.ClassHelperKt" />
       <option name="WORKING_DIRECTORY" />
     </configuration>
     <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
@@ -728,8 +964,15 @@
       <option name="_new_target" value="&quot;&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
     </configuration>
+    <list>
+      <item itemvalue="Application.Tcp808Server" />
+      <item itemvalue="Kotlin.com.pyzy.server808.utils.ClassHelperKt" />
+      <item itemvalue="Kotlin.com.pyzy.server808.message.MessageKt" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Kotlin.com.pyzy.server808.message.MessageKt" />
+        <item itemvalue="Kotlin.com.pyzy.server808.utils.ClassHelperKt" />
         <item itemvalue="Application.Tcp808Server" />
       </list>
     </recent_temporary>
@@ -744,15 +987,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1533608844402</updated>
-      <workItem from="1533608848617" duration="325000" />
+      <workItem from="1533608848617" duration="13433000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="325000" />
+    <option name="totallyTimeSpent" value="13433000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="170" y="44" width="1646" height="958" extended-state="0" />
+    <frame x="-14" y="29" width="1611" height="935" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" />
@@ -767,20 +1010,21 @@
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39976135" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Messages" weight="0.3293556" />
       <window_info anchor="right" id="Palette&#9;" />
       <window_info id="Image Layers" />
       <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.33651552" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Terminal" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24155512" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3293556" />
       <window_info anchor="right" id="Gradle" />
       <window_info anchor="right" id="SciView" />
       <window_info anchor="right" id="Theme Preview" />
       <window_info id="Favorites" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -794,35 +1038,358 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="11" />
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/OldIoClient.kt">
+    <entry file="file://$PROJECT_DIR$/out/production/classes/com/pyzy/server808/message/MessageKt.class">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/OldIoServer.kt">
+    <entry file="file://$PROJECT_DIR$/out/production/classes/com/pyzy/server808/message/Message.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="31" column="39" selection-start-line="31" selection-start-column="39" selection-end-line="31" selection-end-column="39" />
+        <state relative-caret-position="75">
+          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
+    <entry file="file://$PROJECT_DIR$/out/production/classes/com/pyzy/server808/message/JTT0x8100.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="676">
-          <caret line="52" column="34" lean-forward="true" selection-start-line="52" selection-start-column="34" selection-end-line="52" selection-end-column="34" />
+        <state relative-caret-position="75">
+          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out/production/classes/com/pyzy/server808/message/JTT0x0102.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out/production/classes/com/pyzy/server808/message/JTT0x0002.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.2.31/a1a0b714cb760f9bd0f4f9d04915c1748eaefc64/kotlin-stdlib-1.2.31-sources.jar!/generated/_Arrays.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="10741" selection-start-line="10741" selection-end-line="10741" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/src.zip!/java/lang/Class.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="3403" column="34" selection-start-line="3403" selection-start-column="34" selection-end-line="3403" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out/production/classes/com/pyzy/server808/ext/ByteBufKt.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="34" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out/production/classes/com/pyzy/server808/ext/StringKt.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out/production/classes/com/pyzy/server808/ext/ByteBufKitKt.class">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out/production/classes/com/pyzy/server808/ext/ClassKitKt.class">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out/production/classes/com/pyzy/server808/ext/StringKitKt.class">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out/production/classes/com/pyzy/server808/ext/ListKitKt.class">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/ext/Class.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.2.31/a1a0b714cb760f9bd0f4f9d04915c1748eaefc64/kotlin-stdlib-1.2.31-sources.jar!/kotlin/collections/TypeAliases.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="37" selection-start-line="7" selection-start-column="37" selection-end-line="7" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/src.zip!/java/util/ArrayList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="628">
+          <caret line="456" column="19" selection-start-line="456" selection-start-column="19" selection-end-line="456" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.2.31/a1a0b714cb760f9bd0f4f9d04915c1748eaefc64/kotlin-stdlib-1.2.31-sources.jar!/kotlin/Collections.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="80" column="50" selection-start-line="80" selection-start-column="40" selection-end-line="80" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.2.31/a1a0b714cb760f9bd0f4f9d04915c1748eaefc64/kotlin-stdlib-1.2.31-sources.jar!/kotlin/text/Strings.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="978" column="58" selection-start-line="978" selection-start-column="48" selection-end-line="978" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.2.31/a1a0b714cb760f9bd0f4f9d04915c1748eaefc64/kotlin-stdlib-1.2.31-sources.jar!/generated/_Collections.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="1228" column="67" selection-start-line="1228" selection-start-column="63" selection-end-line="1228" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/utils/ClassHelper.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="25" column="57" lean-forward="true" selection-start-line="25" selection-start-column="57" selection-end-line="25" selection-end-column="57" />
+          <folding>
+            <element signature="e#34#224#0" expanded="true" />
+            <element signature="n#!!block;n#setSubList#0;n#!!block;n#Companion#0;n#!!block;n#ClassHelper#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/decoder/JTT808BasedFrameEncoder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/ext/ByteBuf.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="42" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="42" />
+          <folding>
+            <element signature="e#32#121#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home/src.zip!/java/lang/reflect/Method.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="482" column="18" selection-start-line="482" selection-start-column="18" selection-end-line="482" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/message/JTT0x8003.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/message/Message.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3615">
+          <caret line="329" column="24" lean-forward="true" selection-start-line="329" selection-end-line="330" />
+          <folding>
+            <element signature="e#36#208#0" expanded="true" />
+            <element signature="n#!!block;n#decoder0x7e#0;n#!!block;n#Companion#0;n#!!block;n#Message#0" />
+            <element signature="n#!!block;n#encoder0x7e#0;n#!!block;n#Companion#0;n#!!block;n#Message#0" />
+            <element signature="n#!!block;n#validate#0;n#!!block;n#Companion#0;n#!!block;n#Message#0" />
+            <element signature="n#!!block;n#xorCheckCode#0;n#!!block;n#Companion#0;n#!!block;n#Message#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.2.31/a1a0b714cb760f9bd0f4f9d04915c1748eaefc64/kotlin-stdlib-1.2.31-sources.jar!/kotlin/collections/Maps.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="582" column="38" selection-start-line="582" selection-start-column="38" selection-end-line="582" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/message/JTTMessage.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/Tcp808Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+        <state relative-caret-position="75">
+          <caret line="5" column="60" selection-start-line="5" selection-start-column="60" selection-end-line="5" selection-end-column="60" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/settings.gradle">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/Tcp808Client.kt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/OldIoClient.kt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/OldIoServer.kt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/Tcp808Server.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="24" selection-start-column="24" selection-end-column="24" />
+        <state relative-caret-position="195">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/first/Test.kt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/first/DataClassSimple.kt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/Tcp808Client.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/client/ClientHandler.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/client/ClientInitializer.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="10" column="6" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/utils/Haha.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="10" lean-forward="true" selection-start-line="20" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/client/ClientTextHandler.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/model/Bean.kt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/server/ServerTimeoutHandler.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.2.31/a1a0b714cb760f9bd0f4f9d04915c1748eaefc64/kotlin-stdlib-1.2.31-sources.jar!/kotlin/Library.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="40" column="76" lean-forward="true" selection-start-line="40" selection-start-column="76" selection-end-line="40" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.2.31/a1a0b714cb760f9bd0f4f9d04915c1748eaefc64/kotlin-stdlib-1.2.31-sources.jar!/kotlin/Array.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="30" column="57" selection-start-line="30" selection-start-column="56" selection-end-line="30" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/decoder/JTT808BasedFrameDecoder.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="601">
+          <caret line="293" lean-forward="true" selection-start-line="293" selection-end-line="293" />
+          <folding>
+            <element signature="e#671#1079#0" expanded="true" />
+            <element signature="n#!!block;n#decode#1;n#!!block;n#JTT808BasedFrameDecoder#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/decoder/JTT808MessageDecoder.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="7" lean-forward="true" selection-start-line="14" selection-start-column="7" selection-end-line="30" selection-end-column="23" />
+          <folding>
+            <element signature="e#36#249#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/server/ServerInitializer.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="36" column="50" lean-forward="true" selection-start-line="36" selection-start-column="50" selection-end-line="36" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/server/ServerTextHandler.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="690">
+          <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/service/Handler.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="1" lean-forward="true" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
+          <folding>
+            <element signature="e#36#126#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/service/PersonHandler.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="5" lean-forward="true" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+          <folding>
+            <element signature="e#36#125#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/service/DefaultHandler.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="20" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="20" />
+          <folding>
+            <element signature="e#36#126#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pyzy/server808/server/ServerMessageHandler.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="34" column="51" selection-start-line="34" selection-start-column="51" selection-end-line="34" selection-end-column="51" />
+          <folding>
+            <element signature="e#35#325#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

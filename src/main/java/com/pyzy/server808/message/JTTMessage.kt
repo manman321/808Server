@@ -1,15 +1,46 @@
 package com.pyzy.server808.message
 
+import com.pyzy.server808.ext.readInt16
+import com.pyzy.server808.ext.readInt8
+import com.pyzy.server808.ext.readLastString
+import com.pyzy.server808.ext.readString
+import com.pyzy.server808.utils.ClassHelper
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.Unpooled
 import java.nio.ByteBuffer
+import java.util.concurrent.ConcurrentHashMap
+import kotlin.reflect.KClass
 
 open class JTTMessage{
 
+
     var msgId:Int = 0
 
-    open fun decoder(buffer:ByteBuf):JTTMessage{
-        return JTTMessage()
+    companion object {
+        var convertMap:Map<Int,Class<*>>
+
+        init {
+
+            var children = ClassHelper.getAllChildren(JTTMessage::class.java)
+
+            convertMap = children.map { child-> toInt(child.simpleName) to child }.toMap()
+
+        }
+
+        //类名转换成对应的数字，只
+        private fun toInt(clazzName:String):Int{
+
+            var index = clazzName.indexOf("0x",0,true)
+
+            if(index == -1)throw RuntimeException("不可转换的类型错误 Message.toInt")
+
+            var number = clazzName.substring(index + 2)
+
+            return Integer.valueOf(number, 16)
+        }
+    }
+
+    open fun decoder(buffer:ByteBuf){
     }
 
     open fun encoder():ByteBuf{
@@ -36,19 +67,13 @@ class JTT0x0001 : JTTMessage(){
     var sn:Int = 0
     var result = 0
 
-    override fun decoder(buffer: ByteBuf):JTTMessage{
-
-        var msg = JTT0x0001()
-
-        with(msg){
-            with(buffer){
-                msgId = 0x0001
-                ackSn = readInt16()
-                sn = readInt16()
-                result = readInt8()
-            }
+    override fun decoder(buffer: ByteBuf){
+        with(buffer){
+            msgId = 0x0001
+            ackSn = readInt16()
+            sn = readInt16()
+            result = readInt8()
         }
-        return msg
     }
 
 }
@@ -97,22 +122,17 @@ class JTT0x0100:JTTMessage(){
     var vin : String = ""//不固定
 
 
-    override fun decoder(buffer: ByteBuf): JTTMessage {
-        var msg = JTT0x0100()
-        with(msg)
-        {
-            with(buffer){
+    override fun decoder(buffer: ByteBuf) {
+        with(buffer){
 
-                province = readInt16()
-                city = readInt16()
-                manufacturer = readString(5)
-                mode = readString(20)
-                terminalId = readString(7)
-                color = readInt8()
-                vin = readLastString()
-            }
+            province = readInt16()
+            city = readInt16()
+            manufacturer = readString(5)
+            mode = readString(20)
+            terminalId = readString(7)
+            color = readInt8()
+            vin = readLastString()
         }
-        return msg
     }
 
 
@@ -145,13 +165,8 @@ class JTT0x0003:JTTMessage()
 class JTT0x0102:JTTMessage(){
     var authCode:String = ""
 
-    override fun decoder(buffer: ByteBuf): JTTMessage {
-
-        var msg = JTT0x0102()
-
-        msg.authCode = buffer.readLastString()
-
-        return msg
+    override fun decoder(buffer: ByteBuf) {
+        authCode = buffer.readLastString()
     }
 
 }
