@@ -2,11 +2,12 @@ package com.pyzy.server808.ext
 
 import io.netty.buffer.ByteBuf
 import java.nio.ByteBuffer
+import java.nio.CharBuffer
 import java.nio.charset.Charset
 
 fun ByteBuf.printHexString(){
     for (x in 0 until readableBytes()){
-        print(kotlin.String.format("0x%02x ",getByte(x)))
+        print(kotlin.String.format("0x%02x,",getByte(x)))
     }
     println()
 }
@@ -19,21 +20,30 @@ fun ByteBuf.readInt8():Int{
     return readByte().toInt()
 }
 
-fun ByteBuf.readString(length:Int):String{
+fun ByteBuf.readBuffer(length:Int):ByteBuffer{
     var bytes = ByteBuffer.allocate(length)
     readBytes(bytes)
-    return String(Charset.defaultCharset().decode(bytes).array())
+    bytes.flip()
+    return bytes
+}
+
+fun ByteBuf.readAsciiString(length: Int):String{
+    return readBuffer(length).asciiString()
+}
+
+fun ByteBuf.readString(length:Int):String{
+    return readBuffer(length).string()
 }
 
 fun ByteBuf.readLastString():String{
-    var length = readableBytes() - readerIndex()
-    return readString(length)
+    return readString(readableBytes())
 }
 
+
 fun ByteBuf.writeString(value:String){
-
-    var buffer = Charset.defaultCharset().encode(value)
-
+    var buffer = Charset.forName("GBK").encode(value)
     writeBytes(buffer)
 
 }
+
+

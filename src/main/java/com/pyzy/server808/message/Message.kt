@@ -5,8 +5,12 @@ import com.pyzy.server808.ext.printHexString
 import com.pyzy.server808.utils.ClassHelper
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.Unpooled
+import java.math.BigInteger
+import java.nio.ByteBuffer
 import java.text.ParseException
+import java.util.concurrent.atomic.AtomicLong
 import kotlin.experimental.xor
+import kotlin.math.ceil
 
 class Header{
 
@@ -23,7 +27,7 @@ class Header{
                     phone += String.format("%02x",buffer.readByte())
                 }
 
-                sn = buffer.readShort().toInt()
+                sn = buffer.readUnsignedShort()
 
             }
 
@@ -79,7 +83,7 @@ class Header{
      *
      */
     var phone:String = ""//6byte    4
-    var sn:Int = 0//2字节 10
+    var sn:Int = 0//2字节 10 无符号
 
     //消息包封装项
     /**
@@ -88,6 +92,22 @@ class Header{
      */
     var packetCount:Int = -1//2字节  有分包才有这个字节的数据,无分包,无内容
     var packetIndex:Int = -1//2字节
+
+    var divider:Boolean
+    set(value) {
+
+        divider = value
+
+        property = if(value){
+            property or 0x2000
+        }else{
+            property and 0x2000.inv()
+        }
+    }
+    get() {
+        return divider || property and 0x2000 != 0
+    }
+
 
 
 
@@ -107,9 +127,43 @@ class Header{
     }
 
 
+    fun messageLength(length:Int):Header{
+
+        property = property or length or if(divider) 0x2000 else 0
+
+        return this
+    }
+
+
+
+    fun encoder():ByteBuf{
+
+        var buffer = Unpooled.buffer(50);
+
+        with(buffer){
+            writeShort(id)
+            writeShort(property)
+
+            if(phone.length == 11)phone = "0$phone"
+
+            for(x in 0 until 12 step 2){
+                writeByte(phone.substring(x,x + 2).bcd())
+            }
+
+            writeShort(sn)
+            if(isDivider()){
+                writeShort(packetCount)
+                writeShort(packetIndex)
+            }
+
+        }
+        return buffer
+    }
+
+
     override fun toString(): String {
 
-        return "消息id:$id  消息体属性:$property  终端手机号:$phone  消息流水号:$sn  分包后的包总数:$packetCount  包序号:$packetIndex"
+        return "消息id:$id  消息长度:${messageLength()}  消息是否加密:${isRsaEncrypt()}   终端手机号:$phone  消息流水号:$sn  消息是否被分包:${isDivider()} 分包后的包总数:$packetCount  包序号:$packetIndex"
     }
 
     fun print(){
@@ -118,7 +172,7 @@ class Header{
 
 }
 
-class Message{
+class Message<T : JTTMessage>{
 
     //Header
 
@@ -127,16 +181,18 @@ class Message{
     companion object {
         var Identification :Byte = 0x7e
 
+        var MAXLENGTH = 128
 
+        private val serialNo:AtomicLong = AtomicLong(0);
 
             //只单纯的进行字符转义,不转换成为对象
         fun decoder0x7e(buffer:ByteBuf):ByteBuf{
 
             var buf = Unpooled.buffer(buffer.capacity())
 
-            var readable = buffer.readableBytes() - 1
+            var readable = buffer.readableBytes()
 
-            var x = 1
+            var x = 0
             while (x < readable){
 
                 val byte = buffer.getByte(x)
@@ -231,10 +287,14 @@ class Message{
         }
 
 
+
+
     }
 
     var header : Header?;
     var body:ByteBuf;
+    var message:JTTMessage? = null;
+
 
 
     constructor(){
@@ -245,6 +305,79 @@ class Message{
     constructor(body:ByteBuf,header: Header){
         this.body = body
         this.header = header
+    }
+
+
+    constructor(message:T,header: Header){
+        this.message = message
+        this.body = Unpooled.buffer(0)
+        this.header = header
+    }
+
+    fun encoder():ByteBuf{
+
+
+        //长度超过限制之后,在这里需要对消息内容进行分包处理,然后返回bytebuf,让程序一次性发送
+
+        var content = message!!.encoder()
+
+        var buffer = Unpooled.buffer(4096);
+
+        val times = ceil(content.readableBytes() / MAXLENGTH * 1.0).toInt()
+
+        for (x in 0 until times){
+
+            var limit = if(content.readableBytes() > MAXLENGTH) MAXLENGTH else content.readableBytes()
+
+            header!!.divider = times > 1
+
+            header!!.messageLength(limit)
+
+            header!!.packetCount = times
+
+            header!!.packetIndex = x + 1
+
+            var buf = header!!.encoder()
+
+            var innerBuffer = Unpooled.buffer(1000);
+
+
+            innerBuffer.writeBytes(buf)
+
+            content.readBytes(innerBuffer,limit)
+
+
+            innerBuffer.writeByte(xorCheckCode(innerBuffer).toInt())
+
+
+            //转义
+
+
+            buffer.writeByte(0x7e)
+
+            for (y in 0 until innerBuffer.readableBytes()){
+
+                var byte = innerBuffer.getByte(y).toInt()
+
+                if(byte == 0x7e){
+
+                    buffer.writeByte(0x7d);
+                    buffer.writeByte(0x02);
+
+                }else if(byte == 0x7d){
+                    buffer.writeByte(0x7d);
+                    buffer.writeByte(0x01);
+                }else{
+                    buffer.writeByte(byte)
+                }
+            }
+
+            buffer.writeByte(0x7e)
+        }
+
+
+        return buffer
+
     }
 
 

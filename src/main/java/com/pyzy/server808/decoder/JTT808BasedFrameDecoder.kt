@@ -103,7 +103,7 @@ class JTT808BasedFrameDecoder
      * the length of the frame exceeds this value.
      * @param delimiter  the delimiter
      */
-    @JvmOverloads constructor(maxFrameLength: Int = 4096, delimiter: ByteBuf = Unpooled.wrappedBuffer("7e".toByteArray())) : this(maxFrameLength, true, delimiter) {}
+    @JvmOverloads constructor(maxFrameLength: Int = 4096, delimiter: ByteBuf = Unpooled.wrappedBuffer(arrayOf<Byte>(0x7e).toByteArray())) : this(maxFrameLength, true, delimiter) {}
 
     /**
      * Creates a new instance.
@@ -232,6 +232,7 @@ class JTT808BasedFrameDecoder
             }
         }
 
+
         if (minDelim != null) {
             val minDelimLength = minDelim.capacity()
             val frame: ByteBuf
@@ -292,11 +293,16 @@ class JTT808BasedFrameDecoder
 
     protected fun decodeMessage(msg:ByteBuf):Any?{
 
+
         val buf = Message.decoder0x7e(msg)
 
         if(!Message.validate(buf))return null
 
-        val header = Header.decoder(buf)
+        val buffer = Unpooled.buffer(msg.readableBytes() - 1)
+
+        msg.readBytes(buffer)
+
+        val header = Header.decoder(buffer)
 
         val map = JTTMessage.convertMap
 
@@ -308,9 +314,9 @@ class JTT808BasedFrameDecoder
 
         val target = clazz!!.newInstance()
 
-        clazz.methods.filter { method -> method.name.equals("decoder") }.firstOrNull()?.invoke(target)
+        clazz.methods.filter { method -> method.name.equals("decoder") }.firstOrNull()?.invoke(target,buffer)
 
-        return target
+        return Message(target as JTTMessage,header)
     }
 
 

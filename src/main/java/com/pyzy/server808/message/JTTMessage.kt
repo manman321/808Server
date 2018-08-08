@@ -1,20 +1,16 @@
 package com.pyzy.server808.message
 
-import com.pyzy.server808.ext.readInt16
-import com.pyzy.server808.ext.readInt8
-import com.pyzy.server808.ext.readLastString
-import com.pyzy.server808.ext.readString
+import com.pyzy.server808.ext.*
 import com.pyzy.server808.utils.ClassHelper
+import com.sun.xml.internal.xsom.XSWildcard
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.Unpooled
-import java.nio.ByteBuffer
-import java.util.concurrent.ConcurrentHashMap
-import kotlin.reflect.KClass
+import jdk.nashorn.internal.ir.WhileNode
 
 open class JTTMessage{
 
 
-    var msgId:Int = 0
+//    var msgId:Int = 0
 
     companion object {
         var convertMap:Map<Int,Class<*>>
@@ -51,6 +47,11 @@ open class JTTMessage{
         return Unpooled.buffer(capacity)
     }
 
+    open fun messageId():Int{
+        return 0;
+    }
+
+
 }
 
 //终端通用应答
@@ -69,12 +70,16 @@ class JTT0x0001 : JTTMessage(){
 
     override fun decoder(buffer: ByteBuf){
         with(buffer){
-            msgId = 0x0001
             ackSn = readInt16()
             sn = readInt16()
             result = readInt8()
         }
     }
+
+    override fun messageId(): Int{
+        return 0x0001
+    }
+
 
 }
 
@@ -98,63 +103,114 @@ class JTT0x8001 : JTTMessage(){
         return buffer
     }
 
+    override fun messageId(): Int {
+        return 0x8001
+    }
+
 }
 
 
 //终端心跳
-class JTT0x0002:JTTMessage()
+class JTT0x0002:JTTMessage(){
+    override fun messageId(): Int {
+        return 0x0002
+    }
+}
+
+
+enum class PlateColor private constructor(val value: Int, val colorName: String) {
+
+    BLUE(1, "蓝色"),
+    YELLOW(2, "黄色"),
+    BLACK(3,"黑色"),
+    WHITE(4,"白色"),
+    OTHER(9,"其他");
+
+
+    override fun toString(): String {
+        return colorName
+    }
+
+    companion object {
+        fun color(color:Int):PlateColor{
+            return when(color){
+                1 -> BLUE
+                2 -> YELLOW
+                3 -> BLACK
+                4 -> WHITE
+                9 -> OTHER
+                else -> OTHER
+            }
+        }
+    }
+
+}
+
 
 //终端注册
 class JTT0x0100:JTTMessage(){
 
-    var province:Int = 0
+    var provinceId:Int = 0
 
-    var city:Int = 0
+    var cityId:Int = 0
 
-    var manufacturer:String = ""//5字节
+    var manufacturerId:String = ""//5字节
 
-    var mode:String = ""//20字节
+    var terminalModelNo:String = ""//20字节
 
     var terminalId:String = "" //7字节
 
-    var color:Int = 0//1字节
+    var plateColor:PlateColor = PlateColor.BLUE//1字节
 
-    var vin : String = ""//不固定
+    var plateNo: String = ""//不固定
 
 
     override fun decoder(buffer: ByteBuf) {
         with(buffer){
 
-            province = readInt16()
-            city = readInt16()
-            manufacturer = readString(5)
-            mode = readString(20)
+            provinceId = readInt16()
+
+            cityId = readInt16()
+
+            manufacturerId = readAsciiString(5)
+
+            terminalModelNo = readString(20)
             terminalId = readString(7)
-            color = readInt8()
-            vin = readLastString()
+            plateColor = PlateColor.color(readInt8())
+            plateNo = readLastString()
         }
     }
 
 
 
-
-
+    override fun toString(): String {
+        return "省:$provinceId ,市:$cityId ,终端制造商Id: $manufacturerId ,终端型号:$terminalModelNo , 终端id:$terminalId,车牌颜色:$plateColor,车牌号码:$plateNo"
+    }
 }
 
 //终端注册应答
 class JTT0x8100:JTTMessage(){
     var sn :Int = 0
     var result:Int = 0
+    var token:String = ""
 
     override fun encoder(): ByteBuf {
 
-        var buffer = buffer(3)
-
+        var bytes = token.ascii();
+        var buffer = buffer(3 + bytes.limit())
         buffer.writeShort(sn)
         buffer.writeByte(result)
 
+        if(result == 0){
+            buffer.writeBytes(bytes)
+        }
         return buffer
     }
+
+    override fun messageId(): Int {
+        return 0x8100
+    }
+
 }
 
 
