@@ -14,12 +14,14 @@ class JTT0x0100Handler : Handler<Message<JTT0x0100>>{
         val response = JTT0x8100()
         with(response){
             token = "0123456789"
-            sn = msg.header!!.sn
+            sn = msg.header.sn
             result = 0
         }
 
         var result = Message(response,msg.header!!)
         ctx.write(result)
+
+//        super.channelRead0(ctx, msg)
     }
 
 }

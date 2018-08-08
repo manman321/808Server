@@ -24,7 +24,6 @@ import io.netty.channel.ChannelHandlerContext
 import io.netty.handler.codec.ByteToMessageDecoder
 import io.netty.handler.codec.Delimiters
 import io.netty.handler.codec.TooLongFrameException
-import org.omg.CORBA.Object
 
 /**
  * A decoder that splits the received [ByteBuf]s by one or more
@@ -205,7 +204,7 @@ class JTT808BasedFrameDecoder
     override fun decode(ctx: ChannelHandlerContext, `in`: ByteBuf, out: MutableList<Any>) {
         val decoded = decode(ctx, `in`) ?: return
 
-        val msg = decodeMessage(decoded as ByteBuf) ?: return
+        val msg = Message.decoder(decoded as ByteBuf) ?: return
 
         out.add(msg)
     }
@@ -289,36 +288,6 @@ class JTT808BasedFrameDecoder
             return null
         }
     }
-
-
-    protected fun decodeMessage(msg:ByteBuf):Any?{
-
-
-        val buf = Message.decoder0x7e(msg)
-
-        if(!Message.validate(buf))return null
-
-        val buffer = Unpooled.buffer(msg.readableBytes() - 1)
-
-        msg.readBytes(buffer)
-
-        val header = Header.decoder(buffer)
-
-        val map = JTTMessage.convertMap
-
-        if (!map.containsKey(header.id)) {
-            throw RuntimeException(String.format("未实现的消息  0x%02x", header.id))
-        }
-
-        val clazz = map[header.id]
-
-        val target = clazz!!.newInstance()
-
-        clazz.methods.filter { method -> method.name.equals("decoder") }.firstOrNull()?.invoke(target,buffer)
-
-        return Message(target as JTTMessage,header)
-    }
-
 
     private fun fail(frameLength: Long) {
         if (frameLength > 0) {

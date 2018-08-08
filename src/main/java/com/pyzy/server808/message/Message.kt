@@ -1,177 +1,16 @@
 package com.pyzy.server808.message
 
-import com.pyzy.server808.ext.bcd
-import com.pyzy.server808.ext.printHexString
-import com.pyzy.server808.utils.ClassHelper
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.Unpooled
-import java.math.BigInteger
-import java.nio.ByteBuffer
-import java.text.ParseException
 import java.util.concurrent.atomic.AtomicLong
 import kotlin.experimental.xor
 import kotlin.math.ceil
 
-class Header{
 
-    companion object {
-        fun decoder(buffer: ByteBuf):Header{
-
-            var header = Header()
-
-            with(header){
-                id = buffer.readShort().toInt()
-                property = buffer.readShort().toInt()
-
-                for (x in 0 until 6){
-                    phone += String.format("%02x",buffer.readByte())
-                }
-
-                sn = buffer.readUnsignedShort()
-
-            }
-
-            if(header.isDivider()){
-
-                header.packetCount = buffer.readShort().toInt()
-                header.packetIndex = buffer.readShort().toInt()
-
-            }
-
-            return header
-        }
-
-        fun encoder(header:Header,buffer: ByteBuf){
-
-            with(header){
-
-                with(buffer){
-                    writeShort(id)
-                    writeShort(property)
-
-                    if(phone.length == 11)phone = "0$phone"
-
-                    for(x in 0 until 12 step 2){
-                        writeByte(phone.substring(x,x + 2).bcd())
-                    }
-
-                    writeShort(sn)
-                    if(isDivider()){
-                        writeShort(packetCount)
-                        writeShort(packetIndex)
-                    }
-
-                }
-            }
-
-        }
-
-    }
-
-
-    var id:Int = 0//2byte  0
-    var property:Int = 0//2byte 2
-    // 16位  按位处理
-
-    /***
-     *  0   1   2   3   4   5   6   7   8   9   | 10   11   12|  13  |14  15
-     *  ---------------消息体长度-------------    |--数据加密方式-|-分包-|-保留-|
-     *
-     *  数据加密: bit 10 - 12
-     *  不加密：     000
-     *  RSA加密:    100
-     *
-     */
-    var phone:String = ""//6byte    4
-    var sn:Int = 0//2字节 10 无符号
-
-    //消息包封装项
-    /**
-     * 动态解析,只有当存在分包时,才解析以下两项
-     * 包总数
-     */
-    var packetCount:Int = -1//2字节  有分包才有这个字节的数据,无分包,无内容
-    var packetIndex:Int = -1//2字节
-
-    var divider:Boolean
-    set(value) {
-
-        divider = value
-
-        property = if(value){
-            property or 0x2000
-        }else{
-            property and 0x2000.inv()
-        }
-    }
-    get() {
-        return divider || property and 0x2000 != 0
-    }
-
-
-
-
-
-    fun isDivider():Boolean{
-        //第13位为1时表示分包
-        return property and 0x2000 != 0
-    }
-
-    fun isRsaEncrypt():Boolean{
-        //第10位为1,rsa加密
-        return property and 0x400 != 0
-    }
-
-    fun messageLength():Int{
-        return property and 0x3FF
-    }
-
-
-    fun messageLength(length:Int):Header{
-
-        property = property or length or if(divider) 0x2000 else 0
-
-        return this
-    }
-
-
-
-    fun encoder():ByteBuf{
-
-        var buffer = Unpooled.buffer(50);
-
-        with(buffer){
-            writeShort(id)
-            writeShort(property)
-
-            if(phone.length == 11)phone = "0$phone"
-
-            for(x in 0 until 12 step 2){
-                writeByte(phone.substring(x,x + 2).bcd())
-            }
-
-            writeShort(sn)
-            if(isDivider()){
-                writeShort(packetCount)
-                writeShort(packetIndex)
-            }
-
-        }
-        return buffer
-    }
-
-
-    override fun toString(): String {
-
-        return "消息id:$id  消息长度:${messageLength()}  消息是否加密:${isRsaEncrypt()}   终端手机号:$phone  消息流水号:$sn  消息是否被分包:${isDivider()} 分包后的包总数:$packetCount  包序号:$packetIndex"
-    }
-
-    fun print(){
-        println(this)
-    }
-
-}
-
+/**
+ * 1.需要从字节数组中将数据转义成对象时,使用Message.decoder 静态方法获取转义后的对象
+ * 2.将对象编码成字节数组,设置好header和message后,调用encoder得到编码后的字节数组
+ */
 class Message<T : JTTMessage>{
 
     //Header
@@ -179,14 +18,18 @@ class Message<T : JTTMessage>{
     //Body
 
     companion object {
-        var Identification :Byte = 0x7e
 
         var MAXLENGTH = 128
 
+        //序列号生成器
         private val serialNo:AtomicLong = AtomicLong(0);
 
             //只单纯的进行字符转义,不转换成为对象
-        fun decoder0x7e(buffer:ByteBuf):ByteBuf{
+        /**
+         * 将数组中的数据进行反转义
+         * 解析出来的数据包含验证码
+         */
+        private fun decoder0x7e(buffer:ByteBuf):ByteBuf{
 
             var buf = Unpooled.buffer(buffer.capacity())
 
@@ -227,12 +70,13 @@ class Message<T : JTTMessage>{
 
         }
 
-        fun encoder0x7e(buffer: ByteBuf):ByteBuf{
+        /**
+         * @param buffer 传入带校验的完整消息
+         * @return buf 编码后的数据,在首尾直接加上0x7e 即可通过网络流写出去了
+         */
+        private fun encoder0x7e(buffer: ByteBuf):ByteBuf{
 
             var buf = Unpooled.buffer((buffer.capacity() * 1.5).toInt())
-
-
-            buf.writeByte(0x7e)
 
             for (x in 0 until buffer.readableBytes()){
 
@@ -248,9 +92,6 @@ class Message<T : JTTMessage>{
                 }
 
             }
-
-            buf.writeByte(0x7e)
-
             return buf
 
         }
@@ -258,7 +99,10 @@ class Message<T : JTTMessage>{
         //先校验、再转义
 
 
-        fun validate(buffer:ByteBuf):Boolean{
+        /**
+         * 校验数组中的前n为的xor值,与最后一位是否相等
+         */
+        private fun validate(buffer:ByteBuf):Boolean{
 
 //            var byte = buffer.getByte(0);
 //            for (x in 1 until buffer.readableBytes() - 1){
@@ -274,8 +118,10 @@ class Message<T : JTTMessage>{
             return false
         }
 
-        //计算校验码
-        fun xorCheckCode(buffer: ByteBuf,length:Int = -1):Byte{
+        /**
+         * 计算校验码
+         */
+        private fun xorCheckCode(buffer: ByteBuf,length:Int = -1):Byte{
 
             var length = if(length == -1)  buffer.readableBytes() else length
 
@@ -287,57 +133,109 @@ class Message<T : JTTMessage>{
         }
 
 
+        /**
+         *  完整消息参数,为进行解码
+         *  1.解码消息
+         *  2.验证消息完整性
+         *  3.解析头信息
+         *  4.解析消息
+         */
+        fun decoder(msg:ByteBuf):Message<JTTMessage>?{
+
+            val buf = decoder0x7e(msg)
+
+            if(!validate(buf))return null
+
+            val buffer = Unpooled.buffer(msg.readableBytes() - 1)
+
+            msg.readBytes(buffer)
+
+            val header = Header.decoder(buffer)
+
+            val map = JTTMessage.convertMap
+
+            if (!map.containsKey(header.id)) {
+                throw RuntimeException(String.format("未实现的消息  0x%02x", header.id))
+            }
+
+            val clazz = map[header.id]
+
+            val target = clazz!!.newInstance()
+
+            clazz.methods.filter { method -> method.name.equals("decoder") }.firstOrNull()?.invoke(target,buffer)
+
+            return Message(target as JTTMessage,header)
+
+        }
 
 
     }
 
-    var header : Header?;
-    var body:ByteBuf;
-    var message:JTTMessage? = null;
-
-
+    var header : Header;
+    var message:JTTMessage;
 
     constructor(){
-        this.body = Unpooled.buffer(0)
-        this.header = null;
+        this.header = Header();
+        this.message = JTTMessage();
     }
-
-    constructor(body:ByteBuf,header: Header){
-        this.body = body
-        this.header = header
-    }
-
 
     constructor(message:T,header: Header){
         this.message = message
-        this.body = Unpooled.buffer(0)
         this.header = header
     }
 
+    /**
+     * 将数据消息封装在Message中,
+     * 然后通过encode将其编码成字节码
+     *
+     * 使用前需要先设置好message和header信息
+     *
+     * 1.计算出message消息编码后的字节数组
+     * 2.计算消息将分成几次发送
+     * 3.修改header信息(这里的header来源,一般都是从终端上传数据中直接拷贝过来的  平台主动发送数据除外)
+     *  主要是对property字段进行修改,以及是否需要分包的数据进行修改
+     * 4.读取本次需要发送的数据
+     * 5.将消息头和读取到需要发送的数据存入新的数组中,计算校验码
+     * 6.编码转义
+     * 7.添加首尾标识字符
+     *
+     * 8.空消息处理
+     */
     fun encoder():ByteBuf{
 
 
         //长度超过限制之后,在这里需要对消息内容进行分包处理,然后返回bytebuf,让程序一次性发送
 
-        var content = message!!.encoder()
+        var content = message.encoder()
 
         var buffer = Unpooled.buffer(4096);
 
-        val times = ceil(content.readableBytes() / MAXLENGTH * 1.0).toInt()
+        var times = ceil(content.readableBytes() / MAXLENGTH * 1.0).toInt()
+
+        //待测试
+
+
+        if(times == 0)times = 1
 
         for (x in 0 until times){
 
             var limit = if(content.readableBytes() > MAXLENGTH) MAXLENGTH else content.readableBytes()
 
-            header!!.divider = times > 1
+            header.divider = times > 1
 
-            header!!.messageLength(limit)
+            header.messageLength = limit
 
-            header!!.packetCount = times
+            header.packetCount = times
 
-            header!!.packetIndex = x + 1
+            header.packetIndex = x + 1
 
-            var buf = header!!.encoder()
+            //如果为ACK 消息,是否需要重新设置sn?  待考察
+            if(header.sn == 0){
+                header.sn = serialNo.getAndIncrement().toInt()
+            }
+
+
+            var buf = header.encoder()
 
             var innerBuffer = Unpooled.buffer(1000);
 
@@ -349,28 +247,14 @@ class Message<T : JTTMessage>{
 
             innerBuffer.writeByte(xorCheckCode(innerBuffer).toInt())
 
+            var msg = encoder0x7e(innerBuffer)
+
 
             //转义
 
-
             buffer.writeByte(0x7e)
 
-            for (y in 0 until innerBuffer.readableBytes()){
-
-                var byte = innerBuffer.getByte(y).toInt()
-
-                if(byte == 0x7e){
-
-                    buffer.writeByte(0x7d);
-                    buffer.writeByte(0x02);
-
-                }else if(byte == 0x7d){
-                    buffer.writeByte(0x7d);
-                    buffer.writeByte(0x01);
-                }else{
-                    buffer.writeByte(byte)
-                }
-            }
+            buffer.writeBytes(msg)
 
             buffer.writeByte(0x7e)
         }
@@ -379,89 +263,6 @@ class Message<T : JTTMessage>{
         return buffer
 
     }
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-fun testMessage(){
-    var data = listOf<Byte>(0x30,0x7e,0x08,0x7d,0x3b)
-
-    val validate = Message.validate(Unpooled.copiedBuffer(data.toByteArray()))
-
-    println(validate)
-
-    data.printHexString()
-
-    println("=============")
-
-    var buffer = Unpooled.copiedBuffer(data.toByteArray())
-
-    var encoder = Message.encoder0x7e(buffer)
-
-    encoder.printHexString()
-
-
-    println("\n-------------------------")
-
-    var uploadData = listOf<Byte>(0x7e,0x30,0x7d,0x02,0x08,0x7d,0x01,0x55,0x7e)
-
-    var decoder = Message.decoder0x7e(Unpooled.copiedBuffer(uploadData.toByteArray()))
-
-    decoder.printHexString()
-
-
-}
-
-
-fun testHeader(){
-
-    //待处理 添加校验位、去除校验位   应该在Message中进行处理的
-
-
-    val data = listOf<Byte>(
-            0x00,0x01,//id
-            0x00,0x01,//property
-            0x01,0x53,0x51,0x23,0x50,0x44,//phone
-            0x00,0x05
-            )
-
-    data.printHexString()
-
-
-
-    val header = Header.decoder(Unpooled.copiedBuffer(data.toByteArray()))
-
-    header.print()
-
-    var buffer = Unpooled.buffer(100);
-
-
-
-    Header.encoder(header,buffer)
-
-    buffer.printHexString()
-
-
-}
-
-
-fun main(args: Array<String>) {
-
-//    testHeader()
-
-//    println(Message.messageMap)
-
 
 
 }

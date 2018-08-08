@@ -11,10 +11,8 @@ class JTT808BasedFrameEncoder : MessageToByteEncoder<Message<JTTMessage>>() {
     @Throws(Exception::class)
     override fun encode(ctx: ChannelHandlerContext, msg: Message<JTTMessage>, out: ByteBuf) {
 
-
         val bytes = msg.encoder()
         println("终端注册响应: ");bytes.printHexString()
-
         out.writeBytes(bytes)
     }
 }
