@@ -23,15 +23,17 @@ class ServerTimeoutHandler : ChannelInboundHandlerAdapter() {
             when(evt.state()){
 
                 IdleState.ALL_IDLE->{
-                    println("All   [${ctx.channel().id()}] -> ${(System.currentTimeMillis() - baseTime)/ 1000}")
-
+//                    println("All   [${ctx.channel().id()}] -> ${(System.currentTimeMillis() - baseTime)/ 1000}")
+//
                     val channel = ctx.channel()
-
-                    channel.writeAndFlush("【服务器通知】 请重新连接服务器,网络异常断开 \r\n")
-
+//
+//                    channel.writeAndFlush("【服务器通知】 请重新连接服务器,网络异常断开 \r\n")
+//
                     channel.close()
 
-                    ServerTextHandler.channelGroup.remove(channel)
+                    println("【服务器通知】 请重新连接服务器,网络异常断开")
+
+//                    ServerTextHandler.channelGroup.remove(channel)
 //                    println("服务器空闲 通道:$id")
                 }
 
